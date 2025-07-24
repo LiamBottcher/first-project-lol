@@ -12,21 +12,26 @@ public class Server{
 
 		try{
 		ss = new ServerSocket(1337);
-		}
 
-		catch(IOException e){}
 		while (true){
-
-			try{
 
 				Socket socket = ss.accept();
 				ClientHandler client = new ClientHandler(socket, id++);
 				clients.add(client);
 				new Thread(client).start();
 				//new Thread(new Thing(socket, id++)).start(); old way doesn't work because I have to add it to synvhronizedList
-
-			}catch(IOException e){}
-
+				}
+		}catch(IOException e){
+			//this would be the scenario when Server closes I think
+			//no need for break because exception makes program jump
+			//to catch statement outside of the while loop
+			}
+				
+		
+		finally{
+		for (ClientHandler object : clients){
+			object.writeToSelf("Server has closed, thank you for connecting", -1);
+			object.closeEverything();}
 		}
 
 	}

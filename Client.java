@@ -28,6 +28,8 @@ class Connection implements Runnable{
 		while (true){
 			try{
 				String message = reader.readLine();
+				if (message == null){
+					break;}
 				System.out.println(message);
 			}catch(IOException e){}
 		
