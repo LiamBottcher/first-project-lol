@@ -34,6 +34,7 @@ class Connection implements Runnable{
 			}catch(IOException e){}
 		
 		}
+	System.out.println("Server has closed thanks for connecting")
 	}
 	
 
